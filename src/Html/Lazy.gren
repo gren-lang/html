@@ -2,7 +2,7 @@ module Html.Lazy exposing
   ( lazy, lazy2, lazy3, lazy4, lazy5, lazy6, lazy7, lazy8
   )
 
-{-| Since all Elm functions are pure we have a guarantee that the same input
+{-| Since all Gren functions are pure we have a guarantee that the same input
 will always result in the same output. This module gives us tools to be lazy
 about building `Html` that utilize this fact.
 
