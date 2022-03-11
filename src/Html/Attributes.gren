@@ -77,7 +77,6 @@ Attributes that can be attached to any HTML tag but are less commonly used.
 -}
 
 
-import Gren.Kernel.VirtualDom
 import Html exposing (Attribute)
 import Json.Encode as Json
 import VirtualDom
@@ -161,12 +160,12 @@ property =
 
 stringProperty : String -> String -> Attribute msg
 stringProperty key string =
-  Gren.Kernel.VirtualDom.property key (Json.string string)
+  property key (Json.string string)
 
 
 boolProperty : String -> Bool -> Attribute msg
 boolProperty key bool =
-  Gren.Kernel.VirtualDom.property key (Json.bool bool)
+  property key (Json.bool bool)
 
 
 {-| Create *attributes*, like saying `domNode.setAttribute('class', 'greeting')`
@@ -248,7 +247,7 @@ context menu.
 -}
 contextmenu : String -> Attribute msg
 contextmenu =
-  Gren.Kernel.VirtualDom.attribute "contextmenu"
+  attribute "contextmenu"
 
 
 {-| Defines the text direction. Allowed values are ltr (Left-To-Right) or rtl
@@ -262,7 +261,7 @@ dir =
 {-| Defines whether the element can be dragged. -}
 draggable : String -> Attribute msg
 draggable =
-  Gren.Kernel.VirtualDom.attribute "draggable"
+  attribute "draggable"
 
 
 {-| Indicates that the element accept the dropping of content on it. -}
@@ -274,7 +273,7 @@ dropzone =
 {-|-}
 itemprop : String -> Attribute msg
 itemprop =
-  Gren.Kernel.VirtualDom.attribute "itemprop"
+  attribute "itemprop"
 
 
 {-| Defines the language used in the element. -}
@@ -294,7 +293,7 @@ instead.
 -}
 tabindex : Int -> Attribute msg
 tabindex n =
-  Gren.Kernel.VirtualDom.attribute "tabIndex" (String.fromInt n)
+  attribute "tabIndex" (String.fromInt n)
 
 
 
@@ -306,7 +305,7 @@ tabindex n =
 -}
 src : String -> Attribute msg
 src url =
-  stringProperty "src" (Gren.Kernel.VirtualDom.noJavaScriptOrHtmlUri url)
+  stringProperty "src" url
 
 
 {-| Declare the height of a `canvas`, `embed`, `iframe`, `img`, `input`,
@@ -314,7 +313,7 @@ src url =
 -}
 height : Int -> Attribute msg
 height n =
-  Gren.Kernel.VirtualDom.attribute "height" (String.fromInt n)
+  attribute "height" (String.fromInt n)
 
 
 {-| Declare the width of a `canvas`, `embed`, `iframe`, `img`, `input`,
@@ -322,7 +321,7 @@ height n =
 -}
 width : Int -> Attribute msg
 width n =
-  Gren.Kernel.VirtualDom.attribute "width" (String.fromInt n)
+  attribute "width" (String.fromInt n)
 
 
 {-| Alternative text in case an image can't be displayed. Works with `img`,
@@ -484,7 +483,7 @@ acceptCharset =
 -}
 action : String -> Attribute msg
 action uri =
-  stringProperty "action" (Gren.Kernel.VirtualDom.noJavaScriptUri uri)
+  stringProperty "action" uri
 
 
 {-| Indicates whether a `form` or an `input` can have their values automatically
@@ -527,7 +526,7 @@ For `input`.
 -}
 list : String -> Attribute msg
 list =
-  Gren.Kernel.VirtualDom.attribute "list"
+  attribute "list"
 
 
 {-| Defines the minimum number of characters allowed in an `input` or
@@ -535,7 +534,7 @@ list =
 -}
 minlength : Int -> Attribute msg
 minlength n =
-  Gren.Kernel.VirtualDom.attribute "minLength" (String.fromInt n)
+  attribute "minLength" (String.fromInt n)
 
 
 {-| Defines the maximum number of characters allowed in an `input` or
@@ -543,7 +542,7 @@ minlength n =
 -}
 maxlength : Int -> Attribute msg
 maxlength n =
-  Gren.Kernel.VirtualDom.attribute "maxlength" (String.fromInt n)
+  attribute "maxlength" (String.fromInt n)
 
 
 {-| Defines which HTTP method to use when submitting a `form`. Can be GET
@@ -607,7 +606,7 @@ For `select` specifies the number of visible options in a drop-down list.
 -}
 size : Int -> Attribute msg
 size n =
-  Gren.Kernel.VirtualDom.attribute "size" (String.fromInt n)
+  attribute "size" (String.fromInt n)
 
 
 {-| The element ID described by this `label` or the element IDs that are used
@@ -624,7 +623,7 @@ for =
 -}
 form : String -> Attribute msg
 form =
-  Gren.Kernel.VirtualDom.attribute "form"
+  attribute "form"
 
 
 
@@ -661,13 +660,13 @@ step n =
 {-| Defines the number of columns in a `textarea`. -}
 cols : Int -> Attribute msg
 cols n =
-  Gren.Kernel.VirtualDom.attribute "cols" (String.fromInt n)
+  attribute "cols" (String.fromInt n)
 
 
 {-| Defines the number of rows in a `textarea`. -}
 rows : Int -> Attribute msg
 rows n =
-  Gren.Kernel.VirtualDom.attribute "rows" (String.fromInt n)
+  attribute "rows" (String.fromInt n)
 
 
 {-| Indicates whether the text should be wrapped in a `textarea`. Possible
@@ -746,7 +745,7 @@ cite =
 {-| The URL of a linked resource, such as `a`, `area`, `base`, or `link`. -}
 href : String -> Attribute msg
 href url =
-  stringProperty "href" (Gren.Kernel.VirtualDom.noJavaScriptUri url)
+  stringProperty "href" url
 
 
 {-| Specify where the results of clicking an `a`, `area`, `base`, or `form`
@@ -800,7 +799,7 @@ or `style`.
 -}
 media : String -> Attribute msg
 media =
-  Gren.Kernel.VirtualDom.attribute "media"
+  attribute "media"
 
 
 {-| Specify a URL to send a short POST request to when the user clicks on an
@@ -816,7 +815,7 @@ For `a`, `area`, `link`.
 -}
 rel : String -> Attribute msg
 rel =
-  Gren.Kernel.VirtualDom.attribute "rel"
+  attribute "rel"
 
 
 
@@ -828,7 +827,7 @@ For `del`, `ins`, `time`.
 -}
 datetime : String -> Attribute msg
 datetime =
-  Gren.Kernel.VirtualDom.attribute "datetime"
+  attribute "datetime"
 
 
 {-| Indicates whether this date and time is the date of the nearest `article`
@@ -836,7 +835,7 @@ ancestor element. For `time`.
 -}
 pubdate : String -> Attribute msg
 pubdate =
-  Gren.Kernel.VirtualDom.attribute "pubdate"
+  attribute "pubdate"
 
 
 
@@ -868,7 +867,7 @@ For `td` and `th`.
 -}
 colspan : Int -> Attribute msg
 colspan n =
-  Gren.Kernel.VirtualDom.attribute "colspan" (String.fromInt n)
+  attribute "colspan" (String.fromInt n)
 
 
 {-| A space separated list of element IDs indicating which `th` elements are
@@ -884,7 +883,7 @@ For `td` and `th`.
 -}
 rowspan : Int -> Attribute msg
 rowspan n =
-  Gren.Kernel.VirtualDom.attribute "rowspan" (String.fromInt n)
+  attribute "rowspan" (String.fromInt n)
 
 
 {-| Specifies the scope of a header cell `th`. Possible values are: col, row,
@@ -898,7 +897,7 @@ scope =
 {-| Specifies the URL of the cache manifest for an `html` tag. -}
 manifest : String -> Attribute msg
 manifest =
-  Gren.Kernel.VirtualDom.attribute "manifest"
+  attribute "manifest"
 
 
 {-- TODO: maybe reintroduce once there's a better way to disambiguate imports
