@@ -130,10 +130,10 @@ is paired with. For example, maybe we want a way to view notices:
 They all get applied, so if you say `[ class "notice", class "notice-seen" ]`
 you will get both classes!
 -}
-classList : List (String, Bool) -> Attribute msg
+classList : Array (String, Bool) -> Attribute msg
 classList classes =
-  class <| String.join " " <| List.map Tuple.first <|
-    List.filter Tuple.second classes
+  class <| String.join " " <| Array.map Tuple.first <|
+    Array.filter Tuple.second classes
 
 
 
