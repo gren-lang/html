@@ -117,9 +117,11 @@ onInput tagger =
   stopPropagationOn "input" (Json.map alwaysStop (Json.map tagger targetValue))
 
 
-alwaysStop : a -> (a, Bool)
-alwaysStop x =
-  (x, True)
+alwaysStop : msg -> { message : msg, stopPropagation : Bool }
+alwaysStop msg =
+  { message = msg 
+  , stopPropagation = True
+  }
 
 
 {-| Detect [change](https://developer.mozilla.org/en-US/docs/Web/Events/change)
@@ -143,9 +145,11 @@ onSubmit msg =
   preventDefaultOn "submit" (Json.map alwaysPreventDefault (Json.succeed msg))
 
 
-alwaysPreventDefault : msg -> ( msg, Bool )
+alwaysPreventDefault : msg -> { message : msg, preventDefault : Bool }
 alwaysPreventDefault msg =
-  ( msg, True )
+  { message = msg
+  , preventDefault = True
+  }
 
 
 
@@ -213,7 +217,7 @@ touch, scroll, and wheel events in some browsers.
 
 [passive]: https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
 -}
-stopPropagationOn : String -> Json.Decoder (msg, Bool) -> Attribute msg
+stopPropagationOn : String -> Json.Decoder { message : msg, stopPropagation : Bool } -> Attribute msg
 stopPropagationOn event decoder =
   VirtualDom.on event (VirtualDom.MayStopPropagation decoder)
 
@@ -235,7 +239,7 @@ default behavior:
     alwaysPreventDefault msg =
       ( msg, True )
 -}
-preventDefaultOn : String -> Json.Decoder (msg, Bool) -> Attribute msg
+preventDefaultOn : String -> Json.Decoder { message : msg, preventDefault : Bool } -> Attribute msg
 preventDefaultOn event decoder =
   VirtualDom.on event (VirtualDom.MayPreventDefault decoder)
 

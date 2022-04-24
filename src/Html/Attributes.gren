@@ -119,9 +119,9 @@ is paired with. For example, maybe we want a way to view notices:
     viewNotice notice =
       div
         [ classList
-            [ ("notice", True)
-            , ("notice-important", notice.isImportant)
-            , ("notice-seen", notice.isSeen)
+            [ { class = "notice", enabled = True }
+            , { class = "notice-important", enabled = notice.isImportant }
+            , { class = "notice-seen", enabled = notice.isSeen }
             ]
         ]
         [ text notice.content ]
@@ -130,10 +130,13 @@ is paired with. For example, maybe we want a way to view notices:
 They all get applied, so if you say `[ class "notice", class "notice-seen" ]`
 you will get both classes!
 -}
-classList : Array (String, Bool) -> Attribute msg
+classList : Array { class : String, enabled : Bool } -> Attribute msg
 classList classes =
-  class <| String.join " " <| Array.map Tuple.first <|
-    Array.filter Tuple.second classes
+  classes
+    |> Array.filter .enabled
+    |> Array.map .class
+    |> String.join " "
+    |> class
 
 
 
